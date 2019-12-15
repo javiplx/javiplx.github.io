@@ -12,3 +12,11 @@ _kube_ps1_get_cluster() {
 KUBE_PS1_CLUSTER_FUNCTION=_kube_ps1_get_cluster
 ```
 
+But after a few days using this combination, it is a bit uncomfortable. Partly because so many `kube*` breaks a bit tab completion, but mainly because
+the way kubectx works is setting values globally, setting them across all the open shells and in fact disabling working simultaneously with more than one context.  
+A simple way to handle this is taking advantage of `kubectl` merging capabilities, with an environment variable like
+
+KUBECONFIG=.k8s.current:~/.kube/config
+
+which allows fixing the context based on the current directory, which seems a sensible tradeoff
+
