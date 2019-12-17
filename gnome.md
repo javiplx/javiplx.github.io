@@ -17,13 +17,18 @@ and you must [configure explicitly](https://askubuntu.com/a/40313), or your _pro
 
 # tmux
 
-When using tmux, terminal tabs are a bit useless, as they are replaced by windows.
-But we cannot use standard keybindings for tab change in tmux because they are captured by the terminal prior to be processed by tmux. We can explore alternative terminals or just free that combination with
+When using tmux, terminal tabs are a bit useless, as they are replaced by tmux windows. But using the standard
+keybindings whithin tmux (tab change for example) is not possible as they are captured by the terminal. Although
+we can explore alternative terminals, we can just modify some configuration
 ```
 gsettings set org.mate.terminal.keybindings prev-tab disabled
 gsettings set org.mate.terminal.keybindings next-tab disabled
+gsettings set org.mate.terminal.keybindings new-tab disabled
 
 tmux bind-key -n C-PageUp previous-window
 tmux bind-key -n C-PageDown next-window
+tmux bind-key -n C-S-PageUp swap-window -t -1
+tmux bind-key -n C-S-PageDown swap-window -t +1
+tmux bind -n C-T new-window
 ```
 
