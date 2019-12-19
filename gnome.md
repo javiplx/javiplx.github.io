@@ -58,3 +58,10 @@ The wait interval & confirmation on desktop logout can be disabled with
 gsettings set com.canonical.indicator.session  suppress-logout-restart-shutdown true
 ```
 
+# other settings
+
+Single workspace
+```
+gsettings set org.mate.Marco.general num-workspaces 1
+```
+
