@@ -3,7 +3,7 @@ As kubernetes people [dislike taken context or namespace from environment variab
 using tools as [kubectx](https://github.com/ahmetb/kubectx/blob/master/README.md) for comfortable context switching might become a must.
 In that path, showing some [kubernetes environment values on prompt](https://github.com/jonmosco/kube-ps1/blob/master/README.md) is likely also useful
 
-The default `kube-ps1` becomes a bit redundant, as the context encapsulates both the cluster & namespace. Changing `KUBE_PS1_NS_ENABLE` is an option,
+The default `kube-ps1` becomes a bit redundant, as the context encapsulates both the cluster & namespace. Disabling with `KUBE_PS1_NS_ENABLE` is an option,
 but we can just replace the context name with the cluster one
 ```bash
 _kube_ps1_get_cluster() {
@@ -18,5 +18,7 @@ A simple way to handle this is taking advantage of `kubectl` merging capabilitie
 
 KUBECONFIG=.k8s.current:~/.kube/config
 
-which allows fixing the context based on the current directory, which seems a sensible tradeoff
+which allows fixing the context based on the current directory, which seems a sensible tradeoff.  
+This approach didn't played well with python-kubernetes (up to 10.0.1 at least), so you must be sure that `kube_config.py` is patched with this [pull request
+already in master](https://github.com/kubernetes-client/python-base/pull/163)
 
